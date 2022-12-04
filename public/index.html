@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBNM - Administración de cuenta</title>
+    <link rel="stylesheet" href="profilemanagement.css">
+    <link rel="icon" href="assets/icons/burgericon.png">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="flex">
+                <a href="index.html">
+                    <img src="assets/images/Blacklogo.png" alt="Logo JBNM" class="nav-logo">
+                </a>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="about.html" class="nav-link">Nosotros</a>
+                    </li>
+                    <li>
+                        <a href="index.html#form" class="nav-link">Contacto</a>
+                    </li>
+                    <li>
+                        <a href="login.html" class="nav-link">Cerrar sesión</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="flex-row">
+            <section class="window-container">
+                <div class="window-nav">
+                    <ul>
+                        <li>Mesas</li>
+                        <li>Historial</li>
+                    </ul>
+                </div>
+                <div class="window-main">
+                    <div>
+                        <h2 class="window-titles">MESAS</h2>
+                        <section class="tables">
+                            <div id="mesa1">1</div>
+                            <div id="mesa2">2</div>
+                            <div id="mesa3">3</div>
+                            <div id="mesa4">4</div>
+                            <div id="mesa5">5</div>
+                            <div id="mesa6">6</div>
+                            <div id="mesa7">7</div>
+                            <div id="mesa8">8</div>
+                            <div id="mesa9">9</div>
+                            <div id="mesa10">10</div>
+                        </section>
+                    </div>
+                    <div>
+                        <h2 class="window-titles">PENDIENTES</h2>
+                        <section id="pend" class="pending-order">
+                            <div>99</div>  
+                        </section>
+                    </div>
+                    <div>
+                        <h2 class="window-titles">PEDIDO</h2>
+                        <section class="order">
+                            <table class="order-items">
+                                <thead>
+                                    <tr>
+                                        <th>PRODUCTOS</th>
+                                        <th>CANT</th>
+                                        <th>PRECIO</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data">
+                                    <tr>
+                                        <td>Sashimi salmon 5u</td>
+                                        <td>x1</td>
+                                        <td>$ 1,420.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Nigiri salmon 5u</td>
+                                        <td>x1</td>
+                                        <td>$ 1,200.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Spicy Roll 10u</td>
+                                        <td>x1</td>
+                                        <td>$ 1,970.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tex Mex Roll 10u</td>
+                                        <td>x1</td>
+                                        <td>$ 1,970.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Miyagui 20u</td>
+                                        <td>x1</td>
+                                        <td>$ 3,660.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Heineken Lata 330ml</td>
+                                        <td>x1</td>
+                                        <td>$ 460.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Coca-Cola 500ml</td>
+                                        <td>x2</td>
+                                        <td>$ 500.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div id="valorTotal">
+                                <h3>Bienvenido a JBNM</h3>
+                                <p>¡Que tengas una excelente jornada!</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="window-footer">
+                    <button>Cancelar</button>
+                    <button>Editar</button>
+                    <button>Confirmar</button>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>
+            &copy; <strong>JBNM 2022</strong>. Todos los derechos reservados.
+        </p>
+    </footer>
+    <!-- <script src="./scripts/main.js"></script> -->
+    
+    <script>
+        var selected = 1
+        let url = "http://localhost:3000/mesas/"+String(selected)
+        function cargarPagina(url){
+            fetch(url)
+                .then( response => response.json())
+                .then( data => mostrarData(data) )
+                .catch( error => console.log(error) )
+            
+                const mostrarData = (data) => {
+                    let body = ''
+                let precioTotal = 0
+                for (var i = 0; i < data.productos.length; i++) {
+                body += `<tr><td>${data.productos[i].nombre}</td><td>${data.productos[i].cantidad}</td><td>$${data.productos[i].precio}</td></tr>`
+                precioTotal += data.productos[i].precio
+                }
+                
+                document.getElementById('data').innerHTML = body      
+                let total=`<h3>MESA ${data.idMesa}</h3><p>Total: $ ${precioTotal}</p>`
+                
+                document.getElementById('valorTotal').innerHTML = total
+            }
+        }
+        function crearQuerySelector(i){
+            document.querySelector(".mesa"+String(i)).onclick = () =>{
+            url = `http://localhost:3000/mesas/` +String(i)
+            
+            cargarPagina(url)
+            
+            selected = i
+            let query = document.querySelector(".mesa"+String(i))
+            if(query.className == `mesa${String(selected)} clicked`)
+                query.className = `mesa${String(selected)}`
+            else{
+                query.className = `mesa${String(selected)} clicked`
+            }
+                
+                
+            }
+        }
+        function cargarPendientes(){
+            fetch('http://localhost:3000/mesas/?pendiente=true')
+                .then(response => response.json())
+                .then(data => mostrarPendientes(data))
+                .catch(error => console.log(error))
+
+            const mostrarPendientes = (data) =>{
+                console.log(data)
+                let body = ''
+                let bodyfinal = ''
+                for(let i=0;i<data.length;i++){
+                    body += `<div class="mesa${data[i].idMesa}"">${data[i].idMesa}</div>`
+                    document.getElementById('pend').innerHTML = body
+                }
+                document.getElementById('pend').innerHTML = body
+                for(let i=0;i<data.length;i++)
+                    crearQuerySelector(data[i].idMesa)
+            }
+        }
+        
+        
+        cargarPagina(url) //Primera carga
+        cargarPendientes()
+
+
+        document.getElementById(`mesa1`).onclick = () =>{
+            url = `http://localhost:3000/mesas/1`
+            cargarPagina(url)
+            selected = 1
+            if(document.getElementById(`mesa1`).className == "clicked")
+                document.getElementById(`mesa1`).className = "unclicked"
+            else
+                document.getElementById(`mesa1`).className = "clicked"
+            }
+            
+        document.getElementById(`mesa2`).onclick = () =>{
+            url = `http://localhost:3000/mesas/2`
+            cargarPagina(url)
+            selected = 2
+            if(document.getElementById(`mesa2`).className == "clicked")
+                document.getElementById(`mesa2`).className = "unclicked"
+            else
+                document.getElementById(`mesa2`).className = "clicked"
+            }
+        document.getElementById(`mesa3`).onclick = () =>{
+            url = `http://localhost:3000/mesas/3`
+            cargarPagina(url)
+            selected = 3
+            if(document.getElementById(`mesa3`).className == "clicked")
+                document.getElementById(`mesa3`).className = "unclicked"
+            else
+                document.getElementById(`mesa3`).className = "clicked"
+        }
+        document.getElementById(`mesa4`).onclick = () =>{
+            url = `http://localhost:3000/mesas/4`
+            cargarPagina(url)
+            selected = 4
+            if(document.getElementById(`mesa4`).className == "clicked")
+                document.getElementById(`mesa4`).className = "unclicked"
+            else
+                document.getElementById(`mesa4`).className = "clicked"
+        }        
+        document.getElementById("mesa5").onclick = () =>{
+            url = `http://localhost:3000/mesas/5`
+            cargarPagina(url)
+            selected = 5
+            if(document.getElementById(`mesa5`).className == "clicked")
+                document.getElementById(`mesa5`).className = "unclicked"
+            else
+                document.getElementById(`mesa5`).className = "clicked"
+        }    
+        
+        document.getElementById(`mesa6`).onclick = () =>{
+            url = `http://localhost:3000/mesas/6`
+            cargarPagina(url)
+            selected = 6
+            if(document.getElementById(`mesa6`).className == "clicked")
+                document.getElementById(`mesa6`).className = "unclicked"
+            else
+                document.getElementById(`mesa6`).className = "clicked"
+        }
+        document.getElementById(`mesa7`).onclick = () =>{
+            url = `http://localhost:3000/mesas/7`
+            cargarPagina(url)
+            selected = 7
+            if(document.getElementById(`mesa7`).className == "clicked")
+                document.getElementById(`mesa7`).className = "unclicked"
+            else
+                document.getElementById(`mesa7`).className = "clicked"
+        }
+        document.getElementById(`mesa8`).onclick = () =>{
+            url = `http://localhost:3000/mesas/8`
+            cargarPagina(url)
+            selected = 8
+            if(document.getElementById(`mesa8`).className == "clicked")
+                document.getElementById(`mesa8`).className = "unclicked"
+            else
+                document.getElementById(`mesa8`).className = "clicked"
+        }
+        document.getElementById(`mesa9`).onclick = () =>{
+            url = `http://localhost:3000/mesas/9`
+            cargarPagina(url)
+            selected = 9
+            if(document.getElementById(`mesa9`).className == "clicked")
+                document.getElementById(`mesa9`).className = "unclicked"
+            else
+                document.getElementById(`mesa9`).className = "clicked"
+        }
+        document.getElementById(`mesa10`).onclick = () =>{
+            url = `http://localhost:3000/mesas/10`
+            cargarPagina(url)
+            selected = 10
+            if(document.getElementById(`mesa10`).className == "clicked")
+                document.getElementById(`mesa10`).className = "unclicked"
+            else
+                document.getElementById(`mesa10`).className = "clicked"
+        }
+        
+        setInterval(() => cargarPendientes(),1000)
+    </script>
+</body>
+</html>
