@@ -47,16 +47,17 @@
                     <div>
                         <h2 class="window-titles">MESAS</h2>
                         <section class="tables">
-                            <div id="mesa1">1</div>
-                            <div id="mesa2">2</div>
-                            <div id="mesa3">3</div>
-                            <div id="mesa4">4</div>
-                            <div id="mesa5">5</div>
-                            <div id="mesa6">6</div>
-                            <div id="mesa7">7</div>
-                            <div id="mesa8">8</div>
-                            <div id="mesa9">9</div>
-                            <div id="mesa10">10</div>
+                            <div id="mesa1" class="mesa">1</div>
+                            <div id="mesa2" class="mesa">2</div>
+                            <div id="mesa3" class="mesa">3</div>
+                            <div id="mesa4" class="mesa">4</div>
+                            <div id="mesa5" class="mesa">5</div>
+                            <div id="mesa6" class="mesa">6</div>
+                            <div id="mesa7" class="mesa">7</div>
+                            <div id="mesa8" class="mesa">8</div>
+                            <div id="mesa9" class="mesa">9</div>
+                            <div id="mesa10"class="mesa">10</div>
+                            <p id='leyendaMesa'>Mesa Seleccionada</p>
                         </section>
                     </div>
                     <div>
@@ -121,11 +122,17 @@
                         </section>
                     </div>
                 </div>
+
                 <div class="window-footer">
-                    <button>Cancelar</button>
+                    <button id="botonCancelar">Cancelar</button>
                     <button>Editar</button>
-                    <button>Confirmar</button>
+                    <button id="botonConfirmar">Confirmar</button>
                 </div>
+
+                <div style="align-items:left;margin-top: -3rem">
+                    <button class="botonLimpiar" id="botonLimpiar">Limpiar mesa</button>
+                </div>
+                
             </section>
         </div>
     </main>
@@ -146,17 +153,24 @@
                 .catch( error => console.log(error) )
             
                 const mostrarData = (data) => {
-                    let body = ''
+                let body = ''
                 let precioTotal = 0
                 for (var i = 0; i < data.productos.length; i++) {
                 body += `<tr><td>${data.productos[i].nombre}</td><td>${data.productos[i].cantidad}</td><td>$${data.productos[i].precio}</td></tr>`
-                precioTotal += data.productos[i].precio
+                precioTotal += data.productos[i].precio * data.productos[i].cantidad
                 }
                 
                 document.getElementById('data').innerHTML = body      
-                let total=`<h3>MESA ${data.idMesa}</h3><p>Total: $ ${precioTotal}</p>`
                 
+                let total=`<h3>MESA ${data.idMesa}</h3><p>Total: $ ${precioTotal}</p>`
                 document.getElementById('valorTotal').innerHTML = total
+                
+                let leyendaMesa = `<h3>MESA ${data.idMesa}</h3>`
+                document.getElementById('leyendaMesa').innerHTML = leyendaMesa
+                
+                
+                
+
             }
         }
         function crearQuerySelector(i){
@@ -183,7 +197,6 @@
                 .catch(error => console.log(error))
 
             const mostrarPendientes = (data) =>{
-                console.log(data)
                 let body = ''
                 let bodyfinal = ''
                 for(let i=0;i<data.length;i++){
@@ -193,6 +206,7 @@
                 document.getElementById('pend').innerHTML = body
                 for(let i=0;i<data.length;i++)
                     crearQuerySelector(data[i].idMesa)
+                document.getElementsByClassName('mesa'+selected)[0].className = 'mesa' + selected + ' ' + 'clicked'
             }
         }
         
@@ -205,95 +219,100 @@
             url = `http://localhost:3000/mesas/1`
             cargarPagina(url)
             selected = 1
-            if(document.getElementById(`mesa1`).className == "clicked")
-                document.getElementById(`mesa1`).className = "unclicked"
-            else
-                document.getElementById(`mesa1`).className = "clicked"
-            }
+        }
             
         document.getElementById(`mesa2`).onclick = () =>{
             url = `http://localhost:3000/mesas/2`
             cargarPagina(url)
             selected = 2
-            if(document.getElementById(`mesa2`).className == "clicked")
-                document.getElementById(`mesa2`).className = "unclicked"
-            else
-                document.getElementById(`mesa2`).className = "clicked"
             }
         document.getElementById(`mesa3`).onclick = () =>{
             url = `http://localhost:3000/mesas/3`
             cargarPagina(url)
             selected = 3
-            if(document.getElementById(`mesa3`).className == "clicked")
-                document.getElementById(`mesa3`).className = "unclicked"
-            else
-                document.getElementById(`mesa3`).className = "clicked"
         }
         document.getElementById(`mesa4`).onclick = () =>{
             url = `http://localhost:3000/mesas/4`
             cargarPagina(url)
             selected = 4
-            if(document.getElementById(`mesa4`).className == "clicked")
-                document.getElementById(`mesa4`).className = "unclicked"
-            else
-                document.getElementById(`mesa4`).className = "clicked"
         }        
         document.getElementById("mesa5").onclick = () =>{
             url = `http://localhost:3000/mesas/5`
             cargarPagina(url)
             selected = 5
-            if(document.getElementById(`mesa5`).className == "clicked")
-                document.getElementById(`mesa5`).className = "unclicked"
-            else
-                document.getElementById(`mesa5`).className = "clicked"
         }    
         
         document.getElementById(`mesa6`).onclick = () =>{
             url = `http://localhost:3000/mesas/6`
             cargarPagina(url)
             selected = 6
-            if(document.getElementById(`mesa6`).className == "clicked")
-                document.getElementById(`mesa6`).className = "unclicked"
-            else
-                document.getElementById(`mesa6`).className = "clicked"
         }
         document.getElementById(`mesa7`).onclick = () =>{
             url = `http://localhost:3000/mesas/7`
             cargarPagina(url)
             selected = 7
-            if(document.getElementById(`mesa7`).className == "clicked")
-                document.getElementById(`mesa7`).className = "unclicked"
-            else
-                document.getElementById(`mesa7`).className = "clicked"
         }
         document.getElementById(`mesa8`).onclick = () =>{
             url = `http://localhost:3000/mesas/8`
             cargarPagina(url)
             selected = 8
-            if(document.getElementById(`mesa8`).className == "clicked")
-                document.getElementById(`mesa8`).className = "unclicked"
-            else
-                document.getElementById(`mesa8`).className = "clicked"
         }
         document.getElementById(`mesa9`).onclick = () =>{
             url = `http://localhost:3000/mesas/9`
             cargarPagina(url)
             selected = 9
-            if(document.getElementById(`mesa9`).className == "clicked")
-                document.getElementById(`mesa9`).className = "unclicked"
-            else
-                document.getElementById(`mesa9`).className = "clicked"
         }
         document.getElementById(`mesa10`).onclick = () =>{
             url = `http://localhost:3000/mesas/10`
             cargarPagina(url)
             selected = 10
-            if(document.getElementById(`mesa10`).className == "clicked")
-                document.getElementById(`mesa10`).className = "unclicked"
-            else
-                document.getElementById(`mesa10`).className = "clicked"
         }
-        
+
+        document.getElementById('botonCancelar').onclick = () =>{
+            eliminarPedido()
+            let url = "http://localhost:3000/mesas/"+String(selected)
+            cargarPagina(url)
+        }
+
+        function eliminarPedido(){
+            url = "http://localhost:3000/mesas/" + selected + "/pedido"
+            fetch(url,{
+                method: "DELETE",
+            })
+        }
+
+        document.getElementById('botonConfirmar').onclick = () =>{ //REVISAR CODIGO
+            let url  = "http://localhost:3000/mesas/" + selected
+            fetch(url, {
+                method: 'PATCH', 
+                body: JSON.stringify({
+                    pedidoPendiente: false,
+                }),
+                headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+                .then((response) => response.json())
+                .then((json) => console.log(json))
+                .then(pintarMesaOcupada(selected))
+                .catch(err => console.error(err));
+        }
+
+        document.getElementById('botonLimpiar').onclick = () =>{
+            eliminarPedido()
+            let url = "http://localhost:3000/mesas/"+String(selected)
+            cargarPagina(url)
+            despintarMesaOcupada(selected)
+        }
+
+        function pintarMesaOcupada(id){
+            mesa = "mesa"+id
+            document.getElementById(mesa).className = "ocupada"
+        }
+        function despintarMesaOcupada(id){
+            mesa = "mesa"+id
+            document.getElementById(mesa).className = "mesa"
+        }
         setInterval(() => cargarPendientes(),1000)
     </script>
 </body>

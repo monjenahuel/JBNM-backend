@@ -46,10 +46,10 @@ app.post('/mesas/:id/pedido',(req,res) =>{
         let pedidoCompleto = req.body
         let mesaPedido = mesas[id-1]
         if(typeof(pedidoCompleto[0].precio) === typeof(27)){//typeof(pedidoCompleto[0].precio) == number
-            mesaPedido.productos = pedidoCompleto
-            mesaPedido.pedidoPendiente = true
-            res.send(JSON.stringify(mesas[id-1]))
-        }   
+        mesaPedido.productos = mesaPedido.productos.concat(pedidoCompleto) //Concatena pedidos en caso de que ya haya
+        mesaPedido.pedidoPendiente = true
+        res.send(JSON.stringify(mesas[id-1]))
+        }      
     }catch(error) {
         res.status(400)
         console.log("El formato del pedido es incorrecto")
@@ -64,6 +64,13 @@ app.delete('/mesas/:id/pedido',(req,res) =>{
     mesaAVaciar.productos = []
     mesaAVaciar.pedidoPendiente = false
     res.send(JSON.stringify(mesas[id-1]))
+})
+
+app.patch('/mesas/:id',(req,res) =>{
+    let parche = req.body
+    let id = req.params.id
+    mesas[id-1].pedidoPendiente = parche.pedidoPendiente
+    res.send(JSON.stringify(mesas[id-1].pedidoPendiente))
 })
 
 // app.patch('/mesas/:id/pedido/pendiente',(req,res) =>{

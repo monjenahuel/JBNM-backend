@@ -76,8 +76,8 @@ let mesas = [
     productos:[
         {
             nombre: "Bistec de caballo",
-            cantidad: 3,
-            precio: 2700
+            cantidad: 2,
+            precio: 2200
         }
     ],
     pedidoPendiente: true
