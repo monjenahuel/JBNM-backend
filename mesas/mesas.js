@@ -1,40 +1,13 @@
 let mesas = [
-        {
-        idMesa : 1,
-        productos:[
-        {
-            nombre: "Ensalada rusa",
-            cantidad: 1,
-            precio: 450
-        },
-        {
-            nombre: "Tomates cherry griegos",
-            cantidad: 1,
-            precio: 1200
-        },
-        {
-            nombre: "Agua mineral",
-            cantidad: 2,
-            precio: 300
-        }
-        ],
-        pedidoPendiente: true
-    },
+{
+    idMesa : 1,
+    productos:[],
+    pedidoPendiente: false
+},
 {
     idMesa : 2,    
-    productos:[
-        {
-        nombre: "Waffles con helado",
-        cantidad: 2,
-        precio: 1100
-        },
-    {
-        nombre: "Jugo de Naranja",
-        cantidad: 2,
-        precio: 650
-    }
-],
-    pedidoPendiente: true
+    productos:[],
+    pedidoPendiente: false
 },
 {
     idMesa : 3,    
@@ -73,14 +46,8 @@ let mesas = [
 },
 {
     idMesa : 10,    
-    productos:[
-        {
-            nombre: "Bistec de caballo",
-            cantidad: 2,
-            precio: 2200
-        }
-    ],
-    pedidoPendiente: true
+    productos:[],
+    pedidoPendiente: false
 }
 ]
 
