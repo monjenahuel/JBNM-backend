@@ -369,13 +369,13 @@ footer{
 
 .tables .ocupada{ /*Mesas Ocupadas;*/
     border: 3px solid #2a4700;
-    background-color: #e64848;
+    background-color: #9998;
     color:rgb(0, 0, 0)
 }
 
 .tables .ocupada:active{ /*Mesas Ocupadas seleccionadas;*/
     border: 3px solid #2a4700;
-    background-color: #dc0a0a;
+    background-color: rgba(170, 170, 170, 0.096);
     color:rgb(0, 0, 0)
 }
 
