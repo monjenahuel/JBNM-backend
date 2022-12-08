@@ -82,7 +82,10 @@ app.patch('/mesas/:id',(req,res) =>{
 //////////////Deploy
 
 const puerto = process.env.PORT || 3000; //Usar puerto de entorno si hay, o 3000
+console.log("El dominio es: " + process.env.DOMAIN)
 
 app.listen(puerto, () => {
     console.log('Servidor JBNM escuchando en el puerto ' + puerto)
 })
+
+//This is a QA Deploy
