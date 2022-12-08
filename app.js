@@ -26,13 +26,6 @@ app.get('/mesas/:id',(req,res) =>{
     res.send(JSON.stringify(mesas[id-1]))
 })
 
-// app.delete('/mesas/:id',(req,res) =>{
-//     const id = req.params.id
-//     let mesaAVaciar = mesas[id-1]
-//     mesaAVaciar.productos = []
-//     mesaAVaciar.pedidoPendiente = false
-//     res.send(JSON.stringify(mesas[id-1]))
-// })
 
 ////////////////////Pedidos////////////////////
 app.get('/mesas/:id/pedido',(req,res) =>{
@@ -73,16 +66,14 @@ app.patch('/mesas/:id',(req,res) =>{
     res.send(JSON.stringify(mesas[id-1].pedidoPendiente))
 })
 
-// app.patch('/mesas/:id/pedido/pendiente',(req,res) =>{
-    
-// })
-
-
-
 //////////////Deploy
 
 const puerto = process.env.PORT || 3000; //Usar puerto de entorno si hay, o 3000
 
+const dominio = process.env.DOMAIN || "http://localhost:3000"
+
 app.listen(puerto, () => {
     console.log('Servidor JBNM escuchando en el puerto ' + puerto)
+    console.log("El dominio es: " + dominio )
 })
+

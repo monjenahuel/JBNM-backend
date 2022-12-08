@@ -144,9 +144,7 @@
     <!-- <script src="./scripts/main.js"></script> -->
     
     <script>
-        //const dominio = "http://localhost:3000"
-        const dominio = "https://jbnm-backend-production.up.railway.app"
-        
+        const dominio = document.URL.slice(0,-1)
         var selected = 1
         let url = dominio + "/mesas/"+String(selected)
         function cargarPagina(url){
