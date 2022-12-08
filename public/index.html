@@ -145,7 +145,7 @@
     
     <script>
         //const dominio = "http://localhost:3000"
-        const dominio = "https://jbnm-backend-production.up.railway.app"
+        const dominio = process.env.DOMAIN || "http://localhost:3000"
         
         var selected = 1
         let url = dominio + "/mesas/"+String(selected)
