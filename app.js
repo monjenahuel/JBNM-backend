@@ -70,9 +70,8 @@ app.patch('/mesas/:id',(req,res) =>{
 
 const puerto = process.env.PORT || 3000; //Usar puerto de entorno si hay, o 3000
 
-let dominio = process.env.DOMAIN || "http://localhost:3000"
+const dominio = process.env.DOMAIN || "http://localhost:3000
 
-console.log("El dominio es: " + dominio )
 app.listen(puerto, () => {
     console.log('Servidor JBNM escuchando en el puerto ' + puerto)
     console.log("El dominio es: " + dominio )
