@@ -23,4 +23,4 @@ Este es el panel de control donde se reciben los pedidos de todas las mesas. Est
 
 Podes ver tu pedido acá:
 
-* [Panel de control](https://jbnm-backend-production.up.railway.app/index.html)
+* [Panel de control](https://jbnm-backend-production.up.railway.app)
