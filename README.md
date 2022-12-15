@@ -11,13 +11,13 @@ Este es el panel de control donde se reciben los pedidos de todas las mesas. Est
 
 ¿Queres probarlo?
 
-# Mesa 5
+# Mesa 10
 
-<img src="https://raw.githubusercontent.com/monjenahuel/JBNM-backend/main/public/assets/images/JBNM_QR5.png" width="350" height="450" />
+<img src="https://raw.githubusercontent.com/monjenahuel/JBNM-backend/main/public/assets/images/JBNM_QR5.png" width="300" height="300" />
 
 ## Mesa 7
 
-<img src="https://raw.githubusercontent.com/monjenahuel/JBNM-backend/main/public/assets/images/JBNM_QR7.png" width="350" height="450" />
+<img src="https://raw.githubusercontent.com/monjenahuel/JBNM-backend/main/public/assets/images/JBNM_QR7.png" width="300" height="300" />
 
 ## ¿Listo?
 
